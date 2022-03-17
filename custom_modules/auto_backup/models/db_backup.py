@@ -59,10 +59,8 @@ class DbBackup(models.Model):
     )
     sftp_host = fields.Char(
         "SFTP Server",
-        help=(
-            "The host name or IP address from your remote"
-            " server. For example 192.168.0.1"
-        ),
+        help=("The host name or IP address from your remote"
+              " server. For example 192.168.0.1"),
     )
     sftp_port = fields.Integer(
         "SFTP Port",
@@ -71,10 +69,8 @@ class DbBackup(models.Model):
     )
     sftp_user = fields.Char(
         "Username in the SFTP Server",
-        help=(
-            "The username where the SFTP connection "
-            "should be made with. This is the user on the external server."
-        ),
+        help=("The username where the SFTP connection "
+              "should be made with. This is the user on the external server."),
     )
     sftp_password = fields.Char(
         "SFTP Password",
@@ -99,7 +95,8 @@ class DbBackup(models.Model):
     @api.model
     def _default_folder(self):
         """Default to ``backups`` folder inside current server datadir."""
-        return os.path.join(tools.config["data_dir"], "backups", self.env.cr.dbname)
+        return os.path.join(tools.config["data_dir"], "backups",
+                            self.env.cr.dbname)
 
     @api.depends("folder", "method", "sftp_host", "sftp_port", "sftp_user")
     def _compute_name(self):
@@ -120,14 +117,10 @@ class DbBackup(models.Model):
         """Do not use the filestore or you will backup your backups."""
         for record in self:
             if record.method == "local" and record.folder.startswith(
-                tools.config.filestore(self.env.cr.dbname)
-            ):
+                    tools.config.filestore(self.env.cr.dbname)):
                 raise exceptions.ValidationError(
-                    _(
-                        "Do not save backups on your filestore, or you will "
-                        "backup your backups too!"
-                    )
-                )
+                    _("Do not save backups on your filestore, or you will "
+                      "backup your backups too!"))
 
     def action_sftp_test_connection(self):
         """Check if the SFTP settings are correct."""
@@ -136,9 +129,9 @@ class DbBackup(models.Model):
             with self.sftp_connection():
                 raise UserError(_("Connection Test Succeeded!"))
         except (
-            pysftp.CredentialException,
-            pysftp.ConnectionException,
-            pysftp.SSHException,
+                pysftp.CredentialException,
+                pysftp.ConnectionException,
+                pysftp.SSHException,
         ):
             _logger.info("Connection Test Failed!", exc_info=True)
             raise UserError(_("Connection Test Failed!"))
@@ -165,9 +158,9 @@ class DbBackup(models.Model):
                             shutil.copyfileobj(cached, destiny)
                     # Generate new backup
                     else:
-                        db.dump_db(
-                            self.env.cr.dbname, destiny, backup_format=rec.backup_format
-                        )
+                        db.dump_db(self.env.cr.dbname,
+                                   destiny,
+                                   backup_format=rec.backup_format)
                         backup = backup or destiny.name
                 successful |= rec
 
@@ -178,9 +171,9 @@ class DbBackup(models.Model):
                 filename = self.filename(datetime.now(), ext=rec.backup_format)
                 with rec.backup_log():
 
-                    cached = db.dump_db(
-                        self.env.cr.dbname, None, backup_format=rec.backup_format
-                    )
+                    cached = db.dump_db(self.env.cr.dbname,
+                                        None,
+                                        backup_format=rec.backup_format)
 
                     with cached:
                         with rec.sftp_connection() as remote:
@@ -192,8 +185,8 @@ class DbBackup(models.Model):
 
                             # Copy cached backup to remote server
                             with remote.open(
-                                os.path.join(rec.folder, filename), "wb"
-                            ) as destiny:
+                                    os.path.join(rec.folder, filename),
+                                    "wb") as destiny:
                                 shutil.copyfileobj(cached, destiny)
                         successful |= rec
 
@@ -215,9 +208,10 @@ class DbBackup(models.Model):
             _logger.exception("Database backup failed: %s", self.name)
             escaped_tb = tools.html_escape(traceback.format_exc())
             self.message_post(  # pylint: disable=translation-required
-                body="<p>%s</p><pre>%s</pre>"
-                % (_("Database backup failed."), escaped_tb),
-                subtype_id=self.env.ref("auto_backup.mail_message_subtype_failure").id,
+                body="<p>%s</p><pre>%s</pre>" %
+                (_("Database backup failed."), escaped_tb),
+                subtype_id=self.env.ref(
+                    "auto_backup.mail_message_subtype_failure").id,
             )
         else:
             _logger.info("Database backup succeeded: %s", self.name)
@@ -230,24 +224,20 @@ class DbBackup(models.Model):
             with rec.cleanup_log():
                 bu_format = rec.backup_format
                 file_extension = bu_format == "zip" and "dump.zip" or bu_format
-                oldest = self.filename(
-                    now - timedelta(days=rec.days_to_keep), bu_format
-                )
+                oldest = self.filename(now - timedelta(days=rec.days_to_keep),
+                                       bu_format)
 
                 if rec.method == "local":
                     for name in iglob(
-                        os.path.join(rec.folder, "*.%s" % file_extension)
-                    ):
+                            os.path.join(rec.folder, "*.%s" % file_extension)):
                         if os.path.basename(name) < oldest:
                             os.unlink(name)
 
                 elif rec.method == "sftp":
                     with rec.sftp_connection() as remote:
                         for name in remote.listdir(rec.folder):
-                            if (
-                                name.endswith(".%s" % file_extension)
-                                and os.path.basename(name) < oldest
-                            ):
+                            if (name.endswith(".%s" % file_extension)
+                                    and os.path.basename(name) < oldest):
                                 remote.unlink("{}/{}".format(rec.folder, name))
 
     @contextmanager
@@ -255,20 +245,20 @@ class DbBackup(models.Model):
         """Log a possible cleanup failure."""
         self.ensure_one()
         try:
-            _logger.info(
-                "Starting cleanup process after database backup: %s", self.name
-            )
+            _logger.info("Starting cleanup process after database backup: %s",
+                         self.name)
             yield
         except Exception:
             _logger.exception("Cleanup of old database backups failed: %s")
             escaped_tb = tools.html_escape(traceback.format_exc())
             self.message_post(  # pylint: disable=translation-required
-                body="<p>%s</p><pre>%s</pre>"
-                % (_("Cleanup of old database backups failed."), escaped_tb),
+                body="<p>%s</p><pre>%s</pre>" %
+                (_("Cleanup of old database backups failed."), escaped_tb),
                 subtype_id=self.env.ref("auto_backup.failure").id,
             )
         else:
-            _logger.info("Cleanup of old database backups succeeded: %s", self.name)
+            _logger.info("Cleanup of old database backups succeeded: %s",
+                         self.name)
 
     @staticmethod
     def filename(when, ext="zip"):
@@ -279,8 +269,7 @@ class DbBackup(models.Model):
         :param str ext: Extension of the file. Default: dump.zip
         """
         return "{:%Y_%m_%d_%H_%M_%S}.{ext}".format(
-            when, ext="dump.zip" if ext == "zip" else ext
-        )
+            when, ext="dump.zip" if ext == "zip" else ext)
 
     def sftp_connection(self):
         """Return a new SFTP connection with found parameters."""
@@ -291,8 +280,8 @@ class DbBackup(models.Model):
             "port": self.sftp_port,
         }
         _logger.debug(
-            "Trying to connect to sftp://%(username)s@%(host)s:%(port)d", extra=params
-        )
+            "Trying to connect to sftp://%(username)s@%(host)s:%(port)d",
+            extra=params)
         if self.sftp_private_key:
             params["private_key"] = self.sftp_private_key
             if self.sftp_password:

@@ -21,7 +21,5 @@
         'views/maintenance_view.xml',
     ],
     'installable': True,
-
     'odoo-license': 'EE',
-
 }

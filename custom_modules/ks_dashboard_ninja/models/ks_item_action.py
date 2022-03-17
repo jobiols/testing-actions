@@ -9,12 +9,17 @@ class KsDashboardNinjaBoardItemAction(models.TransientModel):
     _description = 'Dashboard Ninja Item Actions'
 
     name = fields.Char()
-    ks_dashboard_item_ids = fields.Many2many("ks_dashboard_ninja.item", string="Dashboard Items")
-    ks_action = fields.Selection([('move', 'Move'),
-                                  ('duplicate', 'Duplicate'),
-                                  ], string="Action")
-    ks_dashboard_ninja_id = fields.Many2one("ks_dashboard_ninja.board", string="Select Dashboard")
-    ks_dashboard_ninja_ids = fields.Many2many("ks_dashboard_ninja.board", string="Select Dashboards")
+    ks_dashboard_item_ids = fields.Many2many("ks_dashboard_ninja.item",
+                                             string="Dashboard Items")
+    ks_action = fields.Selection([
+        ('move', 'Move'),
+        ('duplicate', 'Duplicate'),
+    ],
+                                 string="Action")
+    ks_dashboard_ninja_id = fields.Many2one("ks_dashboard_ninja.board",
+                                            string="Select Dashboard")
+    ks_dashboard_ninja_ids = fields.Many2many("ks_dashboard_ninja.board",
+                                              string="Select Dashboards")
 
     # Move or Copy item to another dashboard action
 
@@ -26,4 +31,5 @@ class KsDashboardNinjaBoardItemAction(models.TransientModel):
             # Using sudo here to allow creating same item without any security error
             for dashboard_id in self.ks_dashboard_ninja_ids:
                 for item in self.ks_dashboard_item_ids:
-                    item.sudo().copy({'ks_dashboard_ninja_board_id': dashboard_id.id})
+                    item.sudo().copy(
+                        {'ks_dashboard_ninja_board_id': dashboard_id.id})

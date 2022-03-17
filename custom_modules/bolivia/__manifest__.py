@@ -6,13 +6,20 @@
 ##############################################################################
 
 {
-    'name': 'bolivia',
-    'version': '14.0.1.0.0',
-    'category': 'Tools',
-    'summary': "Proyect module for Invap Bolivia",
-    'author': "Quilsoft",
-    'website': 'http://github.com/quilsoft/cl-invapb',
-    'license': 'AGPL-3',
+    'name':
+    'bolivia',
+    'version':
+    '14.0.1.0.0',
+    'category':
+    'Tools',
+    'summary':
+    "Proyect module for Invap Bolivia",
+    'author':
+    "Quilsoft",
+    'website':
+    'http://github.com/quilsoft/cl-invapb',
+    'license':
+    'AGPL-3',
     'depends': [
         'account_accountant',
         'account',
@@ -38,11 +45,11 @@
         # 'employee_extend',
         'hide_modules',
 
-
         # Terceros
         'advanced_session_management',
         'auth_oauth_keycloak',
         'auto_backup',
     ],
-    'installable': True,
+    'installable':
+    True,
 }

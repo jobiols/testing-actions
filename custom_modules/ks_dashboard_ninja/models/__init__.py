@@ -6,4 +6,3 @@ from . import ks_dashboard_filters
 from . import ks_dashboard_templates
 from . import ks_odoo_base
 from . import ks_dn_to_do_item
-

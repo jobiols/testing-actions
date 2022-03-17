@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 {
     'name': "Inputmask Widget",
-
     'summary': """
    A Widget to make masks on form fields""",
     'description': """
@@ -86,7 +85,6 @@ Instructions:
    * `Regex <https://github.com/RobinHerbots/Inputmask/blob/3.x/README_regex.md>`_
    * `Phone <https://github.com/RobinHerbots/Inputmask/blob/3.x/README_phone.md>`_
    * `Other <https://github.com/RobinHerbots/Inputmask/blob/3.x/README_other.md>`_""",
-
     'author': "Gilvan Leal",
     'website': "https://gilvanleal.github.io/odoowidgets/",
 

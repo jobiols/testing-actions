@@ -43,6 +43,6 @@ class EmployeeEntryDocuments(models.Model):
     name = fields.Char(string='Document Name', copy=False, required=1)
     document_type = fields.Selection([('entry', 'Entry Process'),
                                       ('exit', 'Exit Process'),
-                                      ('other', 'Other')], string='Checklist Type', required=1)
-
-
+                                      ('other', 'Other')],
+                                     string='Checklist Type',
+                                     required=1)
