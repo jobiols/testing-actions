@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="group_invap_hidden_modules" model="res.groups">
+        <field name="name">Invap group for hide modules</field>
+    </record>
+
+    <record id="mail.menu_root_discuss" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6,0,[ref('hide_modules.group_invap_hidden_modules')])]"/>
+    </record>
+    <record id="calendar.mail_menu_calendar" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6,0,[ref('hide_modules.group_invap_hidden_modules')])]"/>
+    </record>
+    <record id="contacts.menu_contacts" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6,0,[ref('hide_modules.group_invap_hidden_modules')])]"/>
+    </record>
+</odoo>
