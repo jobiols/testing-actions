@@ -29,6 +29,21 @@ class HrEmployeeDocument(models.Model):
     _name = 'hr.employee.document'
     _description = 'HR Employee Documents'
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     def mail_reminder(self):
         now = datetime.now() + timedelta(days=1)
         date_now = now.date()
