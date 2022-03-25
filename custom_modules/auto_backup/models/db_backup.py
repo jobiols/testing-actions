@@ -39,18 +39,18 @@ class DbBackup(models.Model):
     name = fields.Char(
         compute="_compute_name",
         store=True,
-        help="Summary of this backup process",
+        help="Summary of this backup process"
     )
     folder = fields.Char(
         default=lambda self: self._default_folder(),
         help="Absolute path for storing the backups",
-        required=True,
+        required=True
     )
     days_to_keep = fields.Integer(
         required=True,
         default=0,
         help="Backups older than this will be deleted automatically. "
-        "Set 0 to disable autodeletion.",
+        "Set 0 to disable autodeletion."
     )
     method = fields.Selection(
         [("local", "Local disk"), ("sftp", "Remote SFTP server")],

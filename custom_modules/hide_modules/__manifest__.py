@@ -14,6 +14,6 @@
     'website': 'http://github.com/quilsoft/cl-invaph',
     'license': 'AGPL-3',
     'depends': ['mail', 'contacts', 'calendar'],
-    'data': ['views/hide_modules.xml'],
+    'data': ['views/hide_modules.xml'          ],
     'installable': True,
 }
