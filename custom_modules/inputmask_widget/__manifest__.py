@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Inputmask Widget",
-    'summary': """
+    "name": "Inputmask Widget",
+    "summary": """
    A Widget to make masks on form fields""",
-    'description': """
+    "description": """
 ================
 Inputmask Widget
 ================
@@ -85,21 +85,18 @@ Instructions:
    * `Regex <https://github.com/RobinHerbots/Inputmask/blob/3.x/README_regex.md>`_
    * `Phone <https://github.com/RobinHerbots/Inputmask/blob/3.x/README_phone.md>`_
    * `Other <https://github.com/RobinHerbots/Inputmask/blob/3.x/README_other.md>`_""",
-    'author': "Gilvan Leal",
-    'website': "https://gilvanleal.github.io/odoowidgets/",
-
+    "author": "Gilvan Leal",
+    "website": "https://gilvanleal.github.io/odoowidgets/",
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/master/openerp/addons/base/module/module_data.xml
     # for the full list
-    'category': 'Extra Tools',
-    'version': '12.0.1.2.5',
-    'license': 'AGPL-3',
-
+    "category": "Extra Tools",
+    "version": "12.0.1.2.5",
+    "license": "AGPL-3",
     # any module necessary for this one to work correctly
-    'depends': ['web'],
-
+    "depends": ["web"],
     # always loaded
-    "data": ['views/inputmask_templates.xml'],
-    "qweb": ['static/src/xml/mask.xml'],
-    'images': ['static/description/main_screenshot.png']
+    "data": ["views/inputmask_templates.xml"],
+    "qweb": ["static/src/xml/mask.xml"],
+    "images": ["static/description/main_screenshot.png"],
 }

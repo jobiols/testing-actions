@@ -6,19 +6,19 @@
 ##############################################################################
 
 {
-    'name': 'Base custom',
-    'version': '14.0.1.0.0',
-    'category': 'Tools',
-    'summary': "Translations",
-    'author': "Quilsoft",
-    'website': 'http://github.com/quilsoft/cl-invaph',
-    'license': 'AGPL-3',
-    'depends': [
-        'analytic',
-        'account',
+    "name": "Base custom",
+    "version": "14.0.1.0.0",
+    "category": "Tools",
+    "summary": "Translations",
+    "author": "Quilsoft",
+    "website": "http://github.com/quilsoft/cl-invaph",
+    "license": "AGPL-3",
+    "depends": [
+        "analytic",
+        "account",
     ],
-    'data': [
-        'views/res_partner_view.xml',
+    "data": [
+        "views/res_partner_view.xml",
     ],
-    'installable': True,
+    "installable": True,
 }

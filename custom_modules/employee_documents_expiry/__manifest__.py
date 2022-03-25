@@ -21,38 +21,25 @@
 #############################################################################
 
 {
-    'name':
-    'Employee Documents',
-    'version':
-    '14.0.1.1.1',
-    'summary':
-    """Manages Employee Documents With Expiry Notifications.""",
-    'description':
-    """Manages Employee Related Documents with Expiry Notifications.""",
-    'category':
-    'Generic Modules/Human Resources',
-    'author':
-    'Cybrosys Techno Solutions',
-    'company':
-    'Cybrosys Techno Solutions',
-    'maintainer':
-    'Cybrosys Techno Solutions',
-    'website':
-    "https://www.cybrosys.com",
-    'depends': ['base', 'hr'],
-    'data': [
-        'security/ir.model.access.csv',
-        'views/employee_check_list_view.xml',
-        'views/employee_document_view.xml',
+    "name": "Employee Documents",
+    "version": "14.0.1.1.1",
+    "summary": """Manages Employee Documents With Expiry Notifications.""",
+    "description": """Manages Employee Related Documents with Expiry Notifications.""",
+    "category": "Generic Modules/Human Resources",
+    "author": "Cybrosys Techno Solutions",
+    "company": "Cybrosys Techno Solutions",
+    "maintainer": "Cybrosys Techno Solutions",
+    "website": "https://www.cybrosys.com",
+    "depends": ["base", "hr"],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/employee_check_list_view.xml",
+        "views/employee_document_view.xml",
     ],
-    'demo': ['data/data.xml'],
-    'images': ['static/description/banner.png'],
-    'license':
-    'AGPL-3',
-    'installable':
-    True,
-    'auto_install':
-    False,
-    'application':
-    False,
+    "demo": ["data/data.xml"],
+    "images": ["static/description/banner.png"],
+    "license": "AGPL-3",
+    "installable": True,
+    "auto_install": False,
+    "application": False,
 }
