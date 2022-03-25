@@ -7,3 +7,4 @@ action "Lint" {
   uses = "lgeiger/black-action@master"
   args = ". --check"
 }
+
