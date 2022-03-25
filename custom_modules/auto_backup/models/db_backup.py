@@ -40,7 +40,9 @@ class DbBackup(models.Model):
         compute="_compute_name", store=True, help="Summary of this backup process"
     )
     folder = fields.Char(
-        default=lambda self: self._default_folder(),        help="Absolute path for storing the backups",        required=True,
+        default=lambda self: self._default_folder(),
+        help="Absolute path for storing the backups",
+        required=True,
     )
     days_to_keep = fields.Integer(
         required=True,
