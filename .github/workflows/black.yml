@@ -10,3 +10,4 @@ jobs:
       - uses: psf/black@stable
         with:
           src: ./custom_modules
+          options: "--verbose"
