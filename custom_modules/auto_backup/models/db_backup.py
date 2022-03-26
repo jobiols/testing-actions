@@ -81,8 +81,7 @@ class DbBackup(models.Model):
     )
     sftp_private_key = fields.Char(
         "Private key location",
-        help="Path to the private key file. Only the Odoo user should have "
-        "read permissions for that file.",
+        help="Path to the private key file. Only the Odoo user should have "        "read permissions for that file.",
     )
 
     backup_format = fields.Selection(

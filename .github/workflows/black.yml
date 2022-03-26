@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: git checkout HEAD
+      - run: git checkout
       - name: Set up Python 3.9
         uses: actions/setup-python@v1
         with:
