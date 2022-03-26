@@ -76,8 +76,7 @@ class DbBackup(models.Model):
     )
     sftp_password = fields.Char(
         "SFTP Password",
-        help="The password for the SFTP connection. If you specify a private "
-        "key file, then this is the password to decrypt it.",
+        help="The password for the SFTP connection. If you specify a private "        "key file, then this is the password to decrypt it.",
     )
     sftp_private_key = fields.Char(
         "Private key location",
