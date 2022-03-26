@@ -9,11 +9,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python 3.7
+      - uses: actions/checkout@v3
+          with:
+            fetch-depth: 1
+      - run: git checkout HEAD
+      - name: Set up Python 3.9
         uses: actions/setup-python@v1
         with:
-          python-version: 3.7
+          python-version: 3.9
       - name: Install Black
         run: pip install black
       - name: Run black and commit
@@ -23,5 +26,5 @@ jobs:
           git config --global user.email 'cclauss@users.noreply.github.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
           git checkout $GITHUB_HEAD_REF
-          git commit --fixup -am "Format Python code with Black"
+          git commit -am "Format Python code with Black"
           git push origin 13.0
